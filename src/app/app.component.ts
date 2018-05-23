@@ -10,13 +10,17 @@ import { slideAnimation } from './slide.animation';
 export class AppComponent {
   direction = 'left';
   currentIndex = 0;
-  slides = [
+  allSlides = [
     {image: 'assets/img00.jpg', description: 'Image 00'},
     {image: 'assets/img01.jpg', description: 'Image 01'},
     {image: 'assets/img02.jpg', description: 'Image 02'},
     {image: 'assets/img03.jpg', description: 'Image 03'},
     {image: 'assets/img04.jpg', description: 'Image 04'}
   ];
+
+  get slides() {
+    return [this.allSlides[this.currentIndex]];
+  }
 
   constructor() {
   }
@@ -32,11 +36,11 @@ export class AppComponent {
 
   prevSlide() {
     this.direction = 'left';
-    this.currentIndex = (this.currentIndex < this.slides.length - 1) ? ++this.currentIndex : 0;
+    this.currentIndex = (this.currentIndex < this.allSlides.length - 1) ? ++this.currentIndex : 0;
   }
 
   nextSlide() {
     this.direction = 'right';
-    this.currentIndex = (this.currentIndex > 0) ? --this.currentIndex : this.slides.length - 1;
+    this.currentIndex = (this.currentIndex > 0) ? --this.currentIndex : this.allSlides.length - 1;
   }
 }

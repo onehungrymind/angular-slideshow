@@ -1,11 +1,9 @@
 <div class="container slider">
   <div [@slideAnimation]="currentIndex">
-    <ng-template ngFor let-slide [ngForOf]="slides" let-i="index">
-      <img class="slide slide-animation nonDraggableImage"
-           *ngIf="isCurrentSlideIndex(i)"
-           (swiperight)="nextSlide()" (swipeleft)="prevSlide()"
-           [src]="slide.image">
-    </ng-template>
+    <img class="slide slide-animation nonDraggableImage"
+         *ngFor="let slide of slides"
+         (swiperight)="nextSlide()" (swipeleft)="prevSlide()"
+         [src]="slide.image">
   </div>
 
   <a class="arrow prev" href="#" (click)="nextSlide()"></a>
