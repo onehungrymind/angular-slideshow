@@ -6,14 +6,14 @@
          [src]="slide.image">
   </div>
 
-  <a class="arrow prev" href="#" (click)="nextSlide()"></a>
-  <a class="arrow next" href="#" (click)="prevSlide()"></a>
+  <button class="arrow prev" (click)="nextSlide()"></button>
+  <button class="arrow next" (click)="prevSlide()"></button>
   <nav class="nav">
     <div class="wrapper">
       <ul class="dots">
-        <li class="dot" *ngFor="let slide of slides; let i = index;">
-          <a href="#" [ngClass]="{'active':isCurrentSlideIndex(i)}"
-             (click)="setCurrentSlideIndex(i);">{{slide.description}}</a></li>
+        <li class="dot" *ngFor="let slide of allSlides; let i = index;">
+          <span [ngClass]="{'active':isCurrentSlideIndex(i)}"
+             (click)="setCurrentSlideIndex(i);">{{slide.description}}</span></li>
       </ul>
     </div>
   </nav>
