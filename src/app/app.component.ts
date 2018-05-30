@@ -8,9 +8,8 @@ import { slideAnimation } from './slide.animation';
   animations: [slideAnimation]
 })
 export class AppComponent {
-  direction = 'left';
   currentIndex = 0;
-  allSlides = [
+  slides = [
     {image: 'assets/img00.jpg', description: 'Image 00'},
     {image: 'assets/img01.jpg', description: 'Image 01'},
     {image: 'assets/img02.jpg', description: 'Image 02'},
@@ -18,15 +17,17 @@ export class AppComponent {
     {image: 'assets/img04.jpg', description: 'Image 04'}
   ];
 
-  get slides() {
-    return [this.allSlides[this.currentIndex]];
+  constructor() {
+    this.preloadImages();
   }
 
-  constructor() {
+  preloadImages() {
+    this.slides.forEach(slide => {
+      (new Image()).src = slide.image;
+    });
   }
 
   setCurrentSlideIndex(index) {
-    this.direction = (index > this.currentIndex) ? 'left' : 'right';
     this.currentIndex = index;
   }
 
@@ -35,12 +36,10 @@ export class AppComponent {
   }
 
   prevSlide() {
-    this.direction = 'left';
-    this.currentIndex = (this.currentIndex < this.allSlides.length - 1) ? ++this.currentIndex : 0;
+    this.currentIndex = (this.currentIndex < this.slides.length - 1) ? ++this.currentIndex : 0;
   }
 
   nextSlide() {
-    this.direction = 'right';
-    this.currentIndex = (this.currentIndex > 0) ? --this.currentIndex : this.allSlides.length - 1;
+    this.currentIndex = (this.currentIndex > 0) ? --this.currentIndex : this.slides.length - 1;
   }
 }
